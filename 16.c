@@ -1,36 +1,41 @@
 // Without using any string.h library functions Write a program to finds first occurrence of a given sub string in another string
 
 #include <stdio.h>
-#include <string.h>
- 
+//this functio seach for substring 
+int search(char src[], char str[])
+{
+    int i, j, firstOcc;
+    i = 0, j = 0;
+    while (src[i] != '\0')
+    {
+        while (src[i] != str[0] && src[i] != '\0')
+            i++;
+        if (src[i] == '\0')
+            return (-1);
+        firstOcc = i;
+        while (src[i] == str[j] && src[i] != '\0' && str[j] != '\0')
+        {
+            i++;
+            j++;
+        }
+        if (str[j] == '\0')
+            return (firstOcc);
+        if (src[i] == '\0')
+            return (-1);
+        i = firstOcc + 1;
+        j = 0;
+    }
+}
 int main()
 {
-    char str[100], ch;
-    int i, index;
-    index = -1;
- 
-    printf("\n Please Enter any String :  ");
-    gets(str);
-    
-    printf("\n Please Enter the Character that you want to Search for :  ");
-    scanf("%c", &ch);
-
-          for(i = 0; str[i] == '\0'; i++);  //counts 
-    
-    for(i ; i <= strlen(str); i++)
-    {
-        if(str[i] == ch)  
-        {
-            index = i;  
-        }
-    }
-    if(index == -1)
-    {
-        printf("\n Sorry!! We haven't found the the Search Element '%c' ", ch);
-    }
+    int location;
+    char string[] = "google";
+    char target[] = "gle";
+    location = search(string, target);
+    if (location == -1)
+        printf("\nNot found");
     else
-    {
-        printf("\n The Last Occurrence of the Search Element '%c'' at Position %d ", ch, index + 1);
-    }   
-    return 0;
+        printf("\nFound at location %d", location + 1);
+    return (0);
 }
+
